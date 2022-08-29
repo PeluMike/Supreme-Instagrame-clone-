@@ -1,0 +1,121 @@
+    .container-slider {
+        max-height: 450px;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+    
+    .slide {
+        position: absolute;
+        opacity: 0;
+        transition: opacity ease-in-out 0.4s;
+    }
+    
+    .active-anim {
+        opacity: 1;
+    }
+    
+    .btn-slide {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* background: #f1f1f1; */
+        border: 1px solid rgba(34, 34, 34, 0.287);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background: none;
+    }
+    
+    .btn-slide img {
+        width: 25px;
+        height: 25px;
+        pointer-events: none;
+    }
+    
+    .prev {
+        margin-top: -300px;
+    }
+    
+    .next {
+        margin-top: -300px;
+        margin-left: 387px;
+    }
+    
+    .container-dots {
+        /* position: absolute; */
+        /* bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%); */
+        display: flex;
+    }
+    
+    .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        border: 1px solid #000;
+        margin: 0 5px;
+        background: #f1f1f1;
+    }
+    
+    .dot.active {
+        background: rgb(32, 32, 32);
+    }
+    /* user profile and suggestions */
+    
+    .post_footer {
+        margin-top: 40px;
+    }
+    /* btn media query */
+    
+    @media screen and (max-width: 850px) {
+        .next {
+            margin-left: 94%;
+        }
+    }
+    
+    @media screen and (max-width: 725px) {
+        .next {
+            margin-left: 93%;
+        }
+    }
+    
+    @media screen and (max-width: 650px) {
+        .next {
+            margin-left: 92%;
+        }
+    }
+    
+    @media screen and (max-width: 565px) {
+        .next {
+            margin-left: 91%;
+        }
+    }
+    
+    @media screen and (max-width: 550px) {
+        .dot {
+            height: 4px;
+            width: 4px;
+        }
+    }
+    
+    @media screen and (max-width: 490px) {
+        .next {
+            margin-left: 90%;
+        }
+    }
+    
+    @media screen and (max-width: 440px) {
+        .next {
+            margin-left: 87%;
+        }
+    }
+    
+    @media screen and (max-width: 350px) {
+        .next {
+            margin-left: 84%;
+        }
+    }

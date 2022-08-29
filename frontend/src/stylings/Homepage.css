@@ -1,0 +1,290 @@
+        body,
+        html {
+            width: 100%;
+        }
+        /* .just_homePage {
+            margin-top: 500px;
+        }
+         */
+        
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .pro_img {
+            border: rgba(138, 138, 138, 0.477) solid .5px;
+            border-radius: 100%;
+            object-fit: cover;
+        }
+        
+        .home_page_container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: rgb(224, 224, 224);
+            /* position: inherit; */
+            /* position: absolute; */
+        }
+        
+        .empty {
+            height: 120px;
+            width: 100%;
+            background-color: rgb(224, 224, 224);
+        }
+        
+        .Home_body {
+            display: flex;
+            width: 768px;
+            margin: 0 auto;
+            /* border: solid 1px #000; */
+        }
+        /* .posts {
+            overflow: scroll;
+
+        }
+         */
+        
+        .post {
+            width: 430px;
+            min-height: 400px;
+            padding: 10px;
+            border: rgba(138, 138, 138, 0.477) solid .5px;
+            border-radius: 7px;
+            
+        }
+
+        .post_bb:not(:last-child){
+            margin-bottom: 15px;
+        }
+        
+        .post_header {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .Poster_details {
+            display: flex;
+            align-items: center;
+        }
+        
+        .Poster_details img {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .Poster_details a {
+            /* margin-top: 8px; */
+            padding: 10px;
+            font-size: 17px;
+            font-weight: 700;
+
+        }
+
+        .Poster_details a:hover{
+            text-decoration: underline;
+        }
+        
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+        }
+        
+        .post_dots {
+            padding: 0px 5px 0px 0px;
+        }
+        
+        .post_image img {
+            width: 100%;
+            object-fit: cover;
+            margin-top: 20px;
+            height: 450px;
+            object-position: right top;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 20px;
+            align-items: center;
+        }
+        
+        .icons a {
+            outline: none;
+            border: none;
+            background: none;
+            padding: 0px 20px 0px 0px;
+        }
+        
+        .icons a i {
+            font-size: 20px;
+        }
+
+        .liked{
+            color: red;
+            transition: all 1s;
+        }
+        
+        .count_like {
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .caption {
+            font-size: 13px;
+            display: flex;
+            font-weight: 500;
+        }
+        
+        .view_comments {
+            display: block;
+            text-decoration: none;
+            color: rgb(137, 136, 136);
+        }
+        
+        .view_comments:hover {
+            color: #000;
+        }
+        
+        .time_posted {
+            color: rgb(137, 136, 136);
+            display: block;
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .Post_common {
+            width: 95%;
+            margin: 0 auto;
+            margin-top: 8px;
+        }
+        
+        .user_home_profile,
+        .user_comment {
+            margin: 10px 0px 0px 25px;
+            width: 300px;
+        }
+        
+        .user_home_profile {
+            position: fixed;
+            left: 57%;
+        }
+        
+        .user_profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user_home_profile img {
+            width: 45px;
+            height: 45px;
+        }
+        
+        .usernames_h3 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .ii {
+            color: rgb(120, 120, 120);
+        }
+        
+        .sugesstion_follow {
+            margin-top: 25px;
+        }
+        
+        .sugesstion_follow h3 {
+            font-size: 15px;
+            color: rgb(120, 120, 120);
+        }
+        
+        .user_sugesstions {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .user_sugesstions img {
+            width: 30px;
+            height: 30px;
+        }
+        
+        .post_footer a {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        /* home page media query */
+        
+        @media screen and (max-width: 850px) {
+            .Home_body {
+                display: block;
+                width: 100%;
+                border: none;
+            }
+            .post {
+                margin: 0 auto;
+                width: 90%;
+                /* margin-bottom: 15px; */
+            }
+
+            .user_home_profile {
+                display: none;
+            }
+            .post_post {
+                border-right: none;
+                border-bottom: #000 1px solid;
+            }
+        }
+        
+        @media screen and (max-width: 550px) {
+            .home_page_container {
+                width: 100%;
+            }
+            .empty {
+                width: 100%;
+            }
+            .caption,
+            .count_like,
+            .view_comments {
+                font-size: 11px;
+            }
+            .icons button i,
+            .buttons div i {
+                font-size: 16px;
+            }
+        }
+        
+        @media screen and (max-width: 420px) {
+            .home_page_container {
+                width: 100%;
+            }
+            .empty {
+                width: 100%;
+            }
+        }
+        
+        @media screen and (max-width: 380px) {
+            .post,
+            .post_post {
+                width: 86%;
+            }
+            .home_page_container {
+                width: 100%;
+            }
+            .empty {
+                width: 100%;
+            }
+        }

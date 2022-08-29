@@ -1,0 +1,156 @@
+.edit_profile_container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(224, 224, 224);
+}
+
+.update_container {
+    top: 140px;
+    position: relative;
+    width: 880px;
+    background-color: #fff;
+    min-height: 300px;
+    margin: 0 auto;
+    border: rgba(108, 108, 108, 0.521) .5px solid;
+    border-radius: 6px;
+    display: flex;
+}
+
+.edit_links {
+    border-right: #000 1px solid;
+    width: 35%;
+}
+
+.edit_links a {
+    padding: 20px;
+    /* margin-top: 15px; */
+    display: block;
+    font-weight: 500;
+    border-radius: 6px 0px 0px 0px;
+}
+
+.edit_links a:hover {
+    background-color: #c7c7c721;
+    border-left: #c7c7c7 2px solid;
+}
+
+.active {
+    border-left: #000000 2px solid;
+    font-weight: 700;
+}
+
+.edit_profile {
+    padding: 40px;
+}
+
+.edit_profile div {
+    padding: 13px;
+}
+
+.the_form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.the_form label {
+    font-weight: 600;
+}
+
+.the_form input,
+.the_form textarea {
+    padding: 6px;
+    width: 300px;
+    font-size: 16px;
+    outline: none;
+}
+
+.the_form textarea {
+    height: 100px;
+    resize: none;
+}
+
+@media screen and (max-width: 920px) {
+    .update_container {
+        width: 90%;
+    }
+    .the_form label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 845px) {
+    .update_container {
+        display: block;
+    }
+    .edit_links {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid #000;
+        border-right: none;
+    }
+    .active {
+        border-left: none;
+        border-bottom: 2px solid #000;
+        font-weight: 700;
+    }
+    .edit_links a:hover {
+        background-color: #c7c7c721;
+        border-left: none;
+        border-bottom: #c7c7c7 2px solid;
+    }
+    .the_form {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .edit_links a {
+        font-size: 13px;
+        padding: 13px;
+    }
+    .edit_profile {
+        padding: 10px;
+    }
+    .the_form input,
+    .the_form textarea {
+        padding: 3px;
+        width: 240px;
+        font-size: 14px;
+        outline: none;
+    }
+    .the_form {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .the_form {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .the_form input,
+    .the_form textarea {
+        width: 200px;
+        padding: 5px;
+    }
+    .the_form label {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    /* .the_form label {
+        display: inline-block block;
+        width: 200px;
+    } */
+    .the_form input {
+        display: block;
+        width: 100%;
+    }
+    .the_form {
+        display: block;
+    }
+}

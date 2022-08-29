@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Camp {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #152238;
+    /* margin-top: -20px; */
+}
+
+/* li {
+    font-size: 11px;
+    font-weight: 600;
+} */
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.hidden{
+    display: none;
+}
+
+.validError {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.green{
+    color: green;
+}
+
+.Form {
+    height: 30px;
+}
+
+.Form-container {
+    min-height: 60px;
+    background-color: #ffffff;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+#all {
+    padding: 40px;
+}
+
+#all label {
+    font-size: 13px;
+}
+
+input {
+    padding: 6px;
+    width: 80%;
+    height: 30px;
+    outline: none;
+    border: .4px solid rgba(0, 0, 0, 0.119);
+    border-radius: 2px;
+}
+
+.Form-container button {
+    width: 83%;
+    /* outline: none; */
+    border: .4px solid rgba(0, 0, 0, 0.119);
+    padding: 6px;
+    background-color: rgb(0, 147, 98);
+    cursor: pointer;
+    color: #ffffff;
+    height: 40px;
+}
+
+.sign_link {
+    color: #152238;
+    text-decoration: underline;
+}
+
+._d_ {
+    margin-top: 7px;
+}
+
+.logo {
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .Form-container {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .hh {
+        font-size: 14px;
+    }
+}

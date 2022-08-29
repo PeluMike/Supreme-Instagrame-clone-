@@ -1,0 +1,21 @@
+.footer_links {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.footer_links a {
+    color: rgb(120, 120, 120);
+}
+
+.footer_links a::after {
+    content: '\00B7';
+    margin: 0 .25em 0 .25em;
+}
+
+.copyright h1 {
+    margin-top: 30px;
+    font-size: 15px;
+    /* font-weight: 600; */
+    color: rgb(120, 120, 120);
+}

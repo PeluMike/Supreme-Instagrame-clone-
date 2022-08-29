@@ -1,0 +1,161 @@
+.profile_container {
+    width: 900px;
+    /* height: 40px; */
+    margin: 0 auto;
+}
+
+.userProfile {
+    display: flex;
+    align-items: flex-start;
+    border-bottom: #000 1px solid;
+    padding: 0px 0px 40px 0px;
+}
+
+.userProfile .pro_img {
+    width: 140px;
+    height: 140px;
+    border: #fff 1px solid;
+}
+
+.all_user_d {
+    margin-left: 40px;
+}
+
+.username_update {
+    display: flex;
+    align-items: center;
+}
+
+.username_update a {
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px;
+    border: rgba(0, 0, 0, 0.295) .3px solid;
+    border-radius: 13px;
+}
+
+.Post_follow {
+    display: flex;
+    margin-top: 20px;
+}
+
+.Post_follow h5 {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.Post_follow h5 span {
+    font-weight: 700;
+}
+
+.Post_follow h5:not(:first-child) {
+    margin-left: 100px;
+}
+
+.all_user_d h3 {
+    margin-top: 25px;
+    font-size: 17px;
+}
+
+.user_bio {
+    font-size: 14px;
+    width: 70%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.user_link {
+    font-weight: 700;
+    margin-top: 10px;
+    color: rgb(87, 92, 230);
+}
+
+.pppp {
+    padding: 0px 0px 0px 25px;
+}
+
+.pppp center {
+    margin-top: 15px;
+}
+
+.all_user_d p {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(97, 97, 97);
+}
+
+.all_user_d p span {
+    color: #000;
+}
+
+.profile_post {
+    width: 33%;
+    margin: 25px 0px 13px 8px;
+   
+}
+
+.alll_posts {
+    display: flex;
+    flex-wrap: wrap;
+   
+}
+
+.post_profile_img {
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 920px) {
+    .profile_container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .username_update {
+        font-size: 13px;
+    }
+    .Post_follow h5 {
+        font-size: 14px;
+    }
+    .Post_follow h5:not(:first-child) {
+        margin-left: 40px;
+    }
+    .all_user_d h3 {
+        font-size: 14px;
+    }
+    .user_bio {
+        font-size: 12px;
+        width: 80%;
+    }
+    .user_link {
+        font-size: 14px;
+    }
+    .all_user_d p {
+        font-size: 12px;
+    }
+    .post_profile_img {
+        height: 150px;
+    }
+    .user_profile .pro_img {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .userProfile {
+        display: block;
+    }
+    .userProfile .pro_img {
+        margin: 0 auto;
+    }
+    .all_user_d {
+        margin-left: 6px;
+    }
+}
