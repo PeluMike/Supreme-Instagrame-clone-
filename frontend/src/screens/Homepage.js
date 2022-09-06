@@ -1,4 +1,4 @@
-import {React, useEffect }from 'react'
+import {React, useEffect, useState }from 'react'
 
 import Header from '../components/Header'
 import Loader from '../components/Loader'
@@ -6,18 +6,20 @@ import Message from '../components/Message'
 import '../stylings/Homepage.css'
 import ImageSlider from '../components/ImageSlider'
 import Footer from '../components/Footer'
+import InfoShower from '../components/InfoShower'
+import { setShowHandler, removeShowHandler } from '../components/myFunctions'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate} from 'react-router-dom'
 
-import { listPosts, likeCreate } from '../actions/postActions'
+
+import { listPosts, likeCreate,getPostLikes  } from '../actions/postActions'
+import { getUser } from '../actions/userAction'
 
 
 function Homepage() {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-
-
 
 	const postList = useSelector(state => state.postList)
 	const { error, loading, posts} = postList
@@ -27,16 +29,30 @@ function Homepage() {
 	const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
+	// user info 
+	const  userProfile = useSelector(state => state.userProfile)
+	const {userDetail} = userProfile
 
+
+	// getting post likes from the store 
+    const postLike = useSelector(state => state.postLike)
+	const { likes } = postLike
+
+
+	const [show, setShow]= useState(false)
 	useEffect(() =>{
 		if (!userInfo){
             navigate('/login/')
         }else{
-			dispatch(listPosts())}
+			dispatch(listPosts())
+			dispatch(getUser())
+
+		}
+		setShow(false)
 	}, [dispatch, navigate, userInfo])
 
 	const getLikeHandler = (postId) =>{
-		// dispatch(getPostLikes(postId))
+		dispatch(getPostLikes(postId))
 	}
 	
 	const createLikeHandler = (postID) =>{
@@ -45,7 +61,10 @@ function Homepage() {
 			dispatch(listPosts())
 		})
 	}
-    
+
+
+	
+	// console.log(show)
 
   return (
     <div>
@@ -60,13 +79,16 @@ function Homepage() {
 				<div className='pos'>
 					{/* {console.log(posts[1].id)} */}
 					{posts.map((post, index) => (
-						<div className='post post_bb' key={post.id} onLoad={() => getLikeHandler(post.id)}>
+						<div className='post post_bb' key={post.id} >
+
+							<InfoShower id={post.id} show={show} setShow={setShow}/>
+							
 							<div className='post_header'>
 								<div className='Poster_details'>
 									<img src={post.Poster_pro} alt="" className='pro_img'/>
 									<Link to={post.posted_by_me?'/user/profile/': `/user/profile/${post.user}`}>{post.user}</Link>
 								</div>
-								<div className='post_dots noselect'><h3>...</h3></div>
+								<div className='post_dots noselect'><h3 to={''} onClick={()=>setShowHandler(post.id, show, setShow)}>...</h3></div>
 							</div>
 
 							{/* post image */}
@@ -91,21 +113,17 @@ function Homepage() {
 							<Link to={`/post/${post.id}`} className='view_comments Post_common'>{post.post_comments_count === 0? 'No comment. Be the first':post.post_comments_count === 1? `View ${ post.post_comments_count } comment`: `View all ${ post.post_comments_count } comments`}</Link>
 							<p className='time_posted Post_common'>{post.date_created}</p>
 						</div>
-						
 					))}
-
 				</div>
-		
 			}
-			
 				{/* the user prfofile home page side  */}
-
+				
 				<div className='user_home_profile'>
 				<div className='user_profile'>
-					<img src={process.env.PUBLIC_URL +'/weblogo.png '} alt="" className='pro_img'/>
+					<img src={userDetail&& userDetail.profile_picture} alt="" className='pro_img'/>
 					<div className='usernames'>
-					<Link to={''} className='usernames_h3'>Pelumike</Link>
-					<h3 className='ii usernames_h3'>Pelumi olufemi michael</h3>
+					<Link to={''} className='usernames_h3'>{userDetail&& userDetail.username}</Link>
+					<h3 className='ii usernames_h3'>{userDetail&& userDetail.first_name} {userDetail&& userDetail.last_name}</h3>
 					</div>
 					
 				</div>
@@ -116,22 +134,6 @@ function Homepage() {
 						<img src={process.env.PUBLIC_URL +'/weblogo.png '} alt="" className='pro_img'/>
 						<Link to={''} className='usernames_h3'>Pelumike</Link>
 					</div>
-
-					<div className='user_sugesstions'>
-						<img src={process.env.PUBLIC_URL +'/weblogo.png '} alt="" className='pro_img'/>
-						<Link to={''} className='usernames_h3'>Pelumike</Link>
-					</div>
-
-					<div className='user_sugesstions'>
-						<img src={process.env.PUBLIC_URL +'/weblogo.png '} alt="" className='pro_img'/>
-						<Link to={''} className='usernames_h3'>Pelumike</Link>
-					</div>
-
-					<div className='user_sugesstions'>
-						<img src={process.env.PUBLIC_URL +'/weblogo.png '} alt="" className='pro_img'/>
-						<Link to={''} className='usernames_h3'>Pelumike</Link>
-					</div>
-
 				</div> 
 				<div className='post_footer'>
 					<Footer/>
@@ -141,9 +143,6 @@ function Homepage() {
 			</div>
 			
       	</div>
-
-		 
-
     </div>
   )
 }

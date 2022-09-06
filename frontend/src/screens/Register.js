@@ -8,7 +8,7 @@ import '../stylings/register.css'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Logospiner from '../components/Logospiner'
-import { isEmpty, isSame, getLength, fecthUsers, usernameExist, emailExist } from '../myValidator'
+import { isEmpty, isSame, getLength, fecthUsers, usernameExist, emailExist } from '../components/myValidator'
 import { register } from '../actions/userAction'
 
 
@@ -18,7 +18,7 @@ function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
-    // const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('')
     const [allUsers, setAllUsers] = useState([])
     const dispatch = useDispatch()
     // const location = useLocation()
@@ -40,32 +40,34 @@ function Register() {
         }
         fecthUsers(setAllUsers)
     }, [navigate, userInfo])
-    // console.log(username.includes('m','k'))
+   
    
 
     // checking for existing email and username
     const checkUsername = usernameExist(allUsers, username)
     const checkEmail = emailExist(allUsers, email)
-    
-   
     // validations and registering
     const registerHandler =  (e) =>{
         e.preventDefault()
         if (isEmpty(username) || isEmpty(password) || isEmpty(email)){
-            console.log('form cannot be empty')
+            setMessage('Please fill the required forms')
         }else if(!validator.isStrongPassword(password) || validator.isNumeric(username) || !isSame(password, password2)){
+            setMessage('')
             console.log('error at password')
         }else if(getLength(username, 6) || checkUsername){
+            setMessage('')
             console.log('erorr at username')
         }else if(checkEmail || !validator.isEmail(email)){
+            setMessage('')
             console.log('error at email')
         }
         else{
             e.preventDefault()
             const usernameLower = username.toLowerCase()
             const  emailLower = email.toLowerCase()
-            dispatch(register(usernameLower,emailLower, password))
-            navigate('/')
+            dispatch(register(usernameLower,emailLower, password)).then(()=>{
+                navigate('/')
+            })
         }
     }
   return (
@@ -78,6 +80,7 @@ function Register() {
         {loading && <Loader />}
         {error && <Message variant='error'>{error}</Message>}
         <div className='Form-container'>
+            <p className='red'>{message}</p>
             <form onSubmit={registerHandler}>
                 <div id='all'>
                     <div>

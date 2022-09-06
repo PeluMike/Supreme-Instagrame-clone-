@@ -1,12 +1,9 @@
         body,
         html {
             width: 100%;
+           
         }
-        /* .just_homePage {
-            margin-top: 500px;
-        }
-         */
-        
+
         a {
             color: #000;
             text-decoration: none;
@@ -22,9 +19,8 @@
             width: 100%;
             min-height: 100vh;
             background-color: rgb(224, 224, 224);
-            /* position: inherit; */
-            /* position: absolute; */
         }
+
         
         .empty {
             height: 120px;
@@ -36,21 +32,13 @@
             display: flex;
             width: 768px;
             margin: 0 auto;
-            /* border: solid 1px #000; */
         }
-        /* .posts {
-            overflow: scroll;
-
-        }
-         */
-        
         .post {
             width: 430px;
             min-height: 400px;
             padding: 10px;
             border: rgba(138, 138, 138, 0.477) solid .5px;
             border-radius: 7px;
-            
         }
 
         .post_bb:not(:last-child){

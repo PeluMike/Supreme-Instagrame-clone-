@@ -5,9 +5,7 @@ import store from "../store"
 
 export const login = (username, password) => async (dispatch) => {
     try{
-
         dispatch({ type: USER_LOGIN_REQUEST })
-
         const config = {
             headers:{
                 'Content-Type': 'application/json'
@@ -66,7 +64,6 @@ export const register = (username, email, password) => async (dispatch) => {
 // user detail action  action 
 export const getUser = () => async (dispatch) => {
     try{
-
         dispatch({ type: USER_DETAIL_REQUEST })
 
         const userInfo = store.getState().userLogin.userInfo;

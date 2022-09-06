@@ -1,9 +1,9 @@
-import { POST_LIST_FAIL, POST_LIST_REQUEST, POST_LIST_SUCCESS, POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, USER_POSTS_FAIL, USER_POSTS_REQUEST, USER_POSTS_SUCCESS, OTHER_USERS_POSTS_FAIL, OTHER_USERS_POSTS_REQUEST, OTHER_USERS_POSTS_SUCCESS, GET_LIKE_FAIL, GET_LIKE_REQUEST, GET_LIKE_SUCCESS, CREATE_LIKE_REQUEST, CREATE_LIKE_SUCCESS, CREATE_LIKE_FAIL} from "../constants/postConstants"
-
+import { POST_LIST_FAIL, POST_LIST_REQUEST, POST_LIST_SUCCESS, POST_CREATE_FAIL, POST_CREATE_REQUEST, POST_CREATE_SUCCESS, USER_POSTS_FAIL, USER_POSTS_REQUEST, USER_POSTS_SUCCESS, OTHER_USERS_POSTS_FAIL, OTHER_USERS_POSTS_REQUEST, OTHER_USERS_POSTS_SUCCESS, GET_LIKE_FAIL, GET_LIKE_REQUEST, GET_LIKE_SUCCESS, CREATE_LIKE_REQUEST, CREATE_LIKE_SUCCESS, CREATE_LIKE_FAIL, POST_UPDATE_REQUEST, POST_UPDATE_SUCCESS, POST_UPDATE_FAIL, POST_DELETE_REQUEST, POST_DELETE_SUCCESS, POST_DELETE_FAIL} from "../constants/postConstants"
 
 import axios from "axios"
 import store from "../store"
 
+// getting posts apis 
 export const listPosts = () => async (dispatch, ) => {
     try{
         const userInfo = store.getState().userLogin.userInfo;
@@ -21,7 +21,33 @@ export const listPosts = () => async (dispatch, ) => {
 }
 
 
+// createing post api
 export const createPost = (formField) => async (dispatch) => {
+    try{
+
+        dispatch({ type: POST_CREATE_REQUEST })
+
+        const userInfo = store.getState().userLogin.userInfo;
+        const config = {
+            headers:{
+                "Content-type": "multipart/form-data",
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const{ data }  = await axios.post(
+            "/posts/create/post/",
+            formField,
+            config
+            )
+        dispatch({ type: POST_CREATE_SUCCESS, payload:data })
+
+    }catch(error){
+        dispatch({ type: POST_CREATE_FAIL , payload:error.response && error.response.data.detail ? error.response.data.detail: error.message, })
+    }
+}
+
+// updating post
+export const updatePost = (formField, id) => async (dispatch) => {
     try{
 
         dispatch({ type: POST_CREATE_REQUEST })
@@ -35,7 +61,7 @@ export const createPost = (formField) => async (dispatch) => {
         }
 
         const{ data }  = await axios.post(
-            "/posts/create/post/",
+            `/posts/update/${id}/`,
             formField,
             config
             )
@@ -47,6 +73,7 @@ export const createPost = (formField) => async (dispatch) => {
 }
 
 
+// authenticated user posts api
 export const postsUser = () => async (dispatch) => {
     try{
 
@@ -58,7 +85,6 @@ export const postsUser = () => async (dispatch) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-
         const{ data }  = await axios.get(
             "/posts/userposts/",
             config
@@ -71,6 +97,7 @@ export const postsUser = () => async (dispatch) => {
 }
 
 
+// other user posts
 export const postsOtherUsers = (username) => async (dispatch) => {
     try{
 
@@ -96,6 +123,7 @@ export const postsOtherUsers = (username) => async (dispatch) => {
 
 
 
+// liking posts
 export const likeCreate = (postID, formdata) => async (dispatch) => {
     try{
         dispatch({ type: CREATE_LIKE_REQUEST })
@@ -118,6 +146,7 @@ export const likeCreate = (postID, formdata) => async (dispatch) => {
 
 
 
+// getting likes for a post
 export const getPostLikes = (postID) => async (dispatch) => {
     try{
 

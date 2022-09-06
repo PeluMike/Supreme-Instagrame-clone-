@@ -108,6 +108,8 @@
     object-fit: cover;
     margin: 0 auto;
     margin-bottom: 10px;
+    border: .7px solid rgba(31, 31, 31, 0.68);
+    border-radius: 4px;
 }
 
 @media screen and (max-width: 920px) {

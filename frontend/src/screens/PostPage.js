@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import ImageSlider from '../components/ImageSlider'
+import { setShowHandler, removeShowHandler } from '../components/myFunctions'
+import InfoShower from '../components/InfoShower'
 
 import { postDetail } from '../actions/postDetailAction'
 import { createComment, getComments } from '../actions/commentActions'
@@ -40,7 +42,7 @@ function PostPage() {
     const postLike = useSelector(state => state.postLike)
 	const { likes } = postLike
 
-
+    const [show, setShow]= useState(false)
     useEffect(()=>{
         if(!userInfo){
             navigate('/')
@@ -48,6 +50,7 @@ function PostPage() {
             dispatch(postDetail(id))
             dispatch(getComments(id))
             dispatch(getPostLikes(id))
+            setShow(false)
         }
     }, [dispatch, navigate, userInfo, id])
    
@@ -81,6 +84,8 @@ function PostPage() {
             {loading?<Loader/>: error?<Message variant='error'>{error}</Message>: 
 
             <div className='Home_body post_body'>
+
+                <InfoShower id={post.id} show={show} setShow={setShow}/>
                 <div className='post_post'>
 
                     <div className='Poster_details post_user'>
@@ -119,8 +124,7 @@ function PostPage() {
                                 <img src={post.Poster_pro} alt="" className='pro_img'/>
                                 <Link to ={''}>{post.user}</Link>
                             </div>
-                            {/* <div className='post_dots noselect'><h3>...</h3></div> */}
-                            
+                            <div className='post_dots noselect' ><h3 to={''} onClick={()=>setShowHandler(post.id, show, setShow)} >...</h3></div>
                         </div>
                     </div>
                     

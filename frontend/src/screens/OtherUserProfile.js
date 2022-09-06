@@ -84,7 +84,7 @@ function OtherUserProfile() {
                             </h3>
                             <div className='user_bio'>{otherUsersDetail.bio}</div>
                             <Link to={''} className='user_link'>{otherUsersDetail.bio_link}</Link>
-                            <p>Followed by <span> {userFollowers&& userFollowers.followered_by[0]}, </span> <span> {userFollowers&& userFollowers.followered_by[1]}</span></p>
+                            {userFollowers &&<p>Followed by <span> {userFollowers.followered_by}</span></p>}
                         </div>
                         
                     </div>
