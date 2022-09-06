@@ -1,6 +1,3 @@
-from lib2to3.pgen2 import token
-from pyexpat import model
-from attr import field
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import SupremeUser

@@ -1,7 +1,6 @@
 
 from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse
-from requests import post
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
@@ -16,6 +15,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from datetime import datetime
 from django.utils import timezone
+from rest_framework import status
 
 
 # Create your views here.
@@ -58,11 +58,7 @@ def Posts(request):
         serializer_edits['post_liked_by']= postLikedBy
         
         serializer_data.append(serializer_edits)
-
-    
-    
-   
-    
+        
     return Response(serializer_data)
    
 
@@ -179,6 +175,35 @@ def CreatePost(request):
             'message': 'form not created'
         }
         return Response(message)
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def UpdatePost(request, pk):
+    post = Post.objects.get(id=pk)
+    if post.user == request.user.username:
+       
+        serializer = PostSerializer(data=request.data, instance=post)
+        if serializer.is_valid():
+            serializer.save()
+            message = {
+                'message': 'form created successfully'
+            }
+            return Response(serializer.data)
+        else:
+            message = {
+                'message': 'form not created'
+            }
+            return Response(message)
+    
+    else:
+        message = {
+            'message': 'You cannot edit this post!'
+        }
+        return Response(message)
+   
+
 
 
 @api_view(['POST'])

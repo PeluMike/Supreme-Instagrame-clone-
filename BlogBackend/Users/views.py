@@ -1,8 +1,11 @@
+import email
 from urllib import response
 from django.shortcuts import render
 from .serializer import UserSerializer, UserSerializerWithToken, AllUserSerializer
 from .models import SupremeUser
 from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+
 
 from Posts.models import Post
 from Posts.serializer import UserPostSerializer
@@ -41,6 +44,7 @@ def user_view(request):
     return Response(serializer_data)
 
 
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def other_users(request, username):
@@ -58,6 +62,7 @@ def other_users(request, username):
     
     return Response(serializer_data)
 
+
 @api_view(['GET'])
 def all_user(request):
     users = SupremeUser.objects.all()
@@ -69,20 +74,22 @@ def all_user(request):
 @api_view(['POST'])
 def register_user(request):
     data = request.data
-    try:
-        user = SupremeUser.objects.create(
-            username= data['username'],
-            email = data["email"],
-            password = make_password(data['password'])
-        )
-        serializer = UserSerializerWithToken(user, many=False)
-        # if serializer.is_valid():
-        #     serializer.save()
 
-        return Response(serializer.data)
-    except:
-        message = {'details':'username already exist'}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    user_data = UserSerializerWithToken(data=data)
+    if user_data.is_valid(raise_exception=True):
+        user_data.save()
+
+        user = SupremeUser.objects.get(email=user_data.data['email'])
+
+        send_mail(
+            "Thanks for registering", 
+            "We are glad to have you on our supreme blog " + user.username,
+            'pelumikke30@gmail.com',
+            [user.email],
+            fail_silently=False,
+        )
+        return Response(user_data.data)
+  
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -98,6 +105,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
 
 
 @api_view(['POST'])
