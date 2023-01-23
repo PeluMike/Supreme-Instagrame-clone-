@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import ImageSlider from '../components/ImageSlider'
-import { setShowHandler, removeShowHandler } from '../components/myFunctions'
+import { setShowHandler, removeShowHandler } from '../utils/myFunctions'
 import InfoShower from '../components/InfoShower'
 
 import { postDetail } from '../actions/postDetailAction'
@@ -33,26 +33,18 @@ function PostPage() {
 	const {comments} = commentList
 
     
-    // getting user from the store 
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
-
-    
     // getting post likes from the store 
     const postLike = useSelector(state => state.postLike)
 	const { likes } = postLike
 
     const [show, setShow]= useState(false)
     useEffect(()=>{
-        if(!userInfo){
-            navigate('/')
-        }else{
-            dispatch(postDetail(id))
-            dispatch(getComments(id))
-            dispatch(getPostLikes(id))
-            setShow(false)
-        }
-    }, [dispatch, navigate, userInfo, id])
+        dispatch(postDetail(id))
+        dispatch(getComments(id))
+        dispatch(getPostLikes(id))
+        setShow(false)
+        
+    }, [dispatch, navigate, id])
    
 
     // comment data 

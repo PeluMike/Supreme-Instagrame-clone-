@@ -1,7 +1,7 @@
 import React from 'react'
 import '../stylings/info.css'
 import { Link } from 'react-router-dom'
-import { setShowHandler, removeShowHandler } from '../components/myFunctions'
+import { setShowHandler, removeShowHandler } from '../utils/myFunctions'
 
 function InfoShower({show, setShow, id}) {
   return (

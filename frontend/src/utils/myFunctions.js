@@ -1,3 +1,4 @@
+
 export const setShowHandler = (id, value, setValue)=>{
     if(!value){
         let getInfo = document.getElementById(id)
@@ -5,7 +6,7 @@ export const setShowHandler = (id, value, setValue)=>{
         document.body.style.overflow = "hidden"
         setValue(true)
     }
-    }
+}
 
 
 export const removeShowHandler = (id, value, setValue)=>{
@@ -15,4 +16,4 @@ export const removeShowHandler = (id, value, setValue)=>{
         document.body.style.overflow = "scroll"
         setValue(false)
     }
-    }
+}

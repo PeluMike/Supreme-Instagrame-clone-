@@ -8,7 +8,12 @@ import '../stylings/register.css'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Logospiner from '../components/Logospiner'
-import { isEmpty, isSame, getLength, fecthUsers, usernameExist, emailExist } from '../components/myValidator'
+import {
+    isEmpty, isSame, getLength, fecthUsers, usernameExist, emailExist,
+    isContainUppercase, isContainLowercase, isContainNumbers, isContainRegExp
+} from '../utils/myValidator'
+
+
 import { register } from '../actions/userAction'
 
 
@@ -41,8 +46,14 @@ function Register() {
         fecthUsers(setAllUsers)
     }, [navigate, userInfo])
    
+    
+    // password case checking 
+    let passedCaseValidator  = false
+    if ( isContainLowercase(password) && isContainNumbers(password) && isContainRegExp(password) && isContainUppercase(password)){
+        passedCaseValidator = true
+    }
    
-
+    
     // checking for existing email and username
     const checkUsername = usernameExist(allUsers, username)
     const checkEmail = emailExist(allUsers, email)
@@ -51,7 +62,7 @@ function Register() {
         e.preventDefault()
         if (isEmpty(username) || isEmpty(password) || isEmpty(email)){
             setMessage('Please fill the required forms')
-        }else if(!validator.isStrongPassword(password) || validator.isNumeric(username) || !isSame(password, password2)){
+        }else if(!validator.isStrongPassword(password) || validator.isNumeric(username) || !isSame(password, password2) || !passedCaseValidator){
             setMessage('')
             console.log('error at password')
         }else if(getLength(username, 6) || checkUsername){
@@ -70,6 +81,7 @@ function Register() {
             })
         }
     }
+    
   return (
     <div className='Camp'>
         <div className='Form'>
@@ -125,7 +137,17 @@ function Register() {
                         <label htmlFor="Password">Password*</label>
                         <br />
                         <input type="password" placeholder='Enter your password...' name='password' value={password} onChange={(e) => setPassword(e.target.value)} autoComplete=''/>
-                        {password? <li className={validator.isStrongPassword(password)?'green validError':'red validError'}>Password must contain Uppercase, lowercase and a special character</li>: ''}
+                        {/* {password? <li className={validator.isStrongPassword(password)?'green validError':'red validError'}>Password must contain Uppercase, lowercase and a special character</li>: ''} */}
+                       
+                        {password?
+                            <div>
+                                <li className={isContainUppercase(password)?'green validError':'red validError'}>Must contain uppercase</li>
+                                <li className={isContainLowercase(password)?'green validError':'red validError'}>Must contain lowercase</li>
+                                <li className={isContainNumbers(password)?'green validError':'red validError'}>Must contain numbers</li>
+                                <li className={isContainRegExp(password)?'green validError':'red validError'}>Must contain a special caracter</li>
+                            </div>
+                        : ""}
+                        
                     </div>
                     <br />
                     

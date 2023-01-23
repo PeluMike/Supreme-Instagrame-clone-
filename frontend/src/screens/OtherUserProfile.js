@@ -40,9 +40,10 @@ function OtherUserProfile() {
         })
     }, [dispatch, username])
 
-    // const openNewTab = (x) =>{
-    //     window.open(x)
-    // }
+    // bio link opener 
+    const openBioLink =(url)=>{
+        window.open(url, "_blank")
+    }
 
     const followUserHandler = () =>{
        dispatch(followUser(username)).then((response) =>{
@@ -83,7 +84,7 @@ function OtherUserProfile() {
                                 {otherUsersDetail.first_name && otherUsersDetail.last_name? <span>{otherUsersDetail.first_name} { otherUsersDetail.last_name}</span>  : ''}
                             </h3>
                             <div className='user_bio'>{otherUsersDetail.bio}</div>
-                            <Link to={''} className='user_link'>{otherUsersDetail.bio_link}</Link>
+                            <Link to={''} className='user_link' onClick={()=>openBioLink(otherUsersDetail.bio_link)}>{otherUsersDetail.bio_link}</Link>
                             {userFollowers &&<p>Followed by <span> {userFollowers.followered_by}</span></p>}
                         </div>
                         

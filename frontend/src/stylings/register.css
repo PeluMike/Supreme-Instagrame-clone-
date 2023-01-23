@@ -15,6 +15,8 @@
     font-weight: 600;
 } */
 
+
+/*  for validatoin  */
 .red{
     color: red;
 }
@@ -36,6 +38,8 @@
     color: green;
 }
 
+
+/* forms styles  */
 .Form {
     height: 30px;
 }

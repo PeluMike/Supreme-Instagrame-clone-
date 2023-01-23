@@ -7,7 +7,7 @@ import '../stylings/Homepage.css'
 import ImageSlider from '../components/ImageSlider'
 import Footer from '../components/Footer'
 import InfoShower from '../components/InfoShower'
-import { setShowHandler, removeShowHandler } from '../components/myFunctions'
+import { setShowHandler, removeShowHandler } from '../utils/myFunctions'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate} from 'react-router-dom'
@@ -15,6 +15,7 @@ import { Link, useNavigate} from 'react-router-dom'
 
 import { listPosts, likeCreate,getPostLikes  } from '../actions/postActions'
 import { getUser } from '../actions/userAction'
+import axios from 'axios'
 
 
 function Homepage() {
@@ -23,37 +24,41 @@ function Homepage() {
 
 	const postList = useSelector(state => state.postList)
 	const { error, loading, posts} = postList
-
 	
-	// checking if a user is loged in and redirecting
-	const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
-
 	// user info 
 	const  userProfile = useSelector(state => state.userProfile)
 	const {userDetail} = userProfile
 
 
 	// getting post likes from the store 
-    const postLike = useSelector(state => state.postLike)
-	const { likes } = postLike
-
+    // const postLike = useSelector(state => state.postLike)
+	// const { likes } = postLike
+	const [likes, setLikes] = useState('')
 
 	const [show, setShow]= useState(false)
-	useEffect(() =>{
-		if (!userInfo){
-            navigate('/login/')
-        }else{
-			dispatch(listPosts())
-			dispatch(getUser())
+	
 
-		}
-		setShow(false)
-	}, [dispatch, navigate, userInfo])
-
-	const getLikeHandler = (postId) =>{
-		dispatch(getPostLikes(postId))
+	const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+	async function fecthPostsLike(){
+		const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+		const data = await axios.get("/posts/likes/", config)
+		setLikes(data.data)
 	}
+	
+	useEffect(() =>{
+		dispatch(listPosts())
+		fecthPostsLike()
+		// dispatch(getUser())
+		setShow(false)
+	}, [dispatch, navigate])
+
+
+	console.log(likes)
 	
 	const createLikeHandler = (postID) =>{
 		const formdata = new FormData()

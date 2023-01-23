@@ -22,17 +22,7 @@ function CreatPost() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-
-    // checking if a user is loged in and redirecting
-	const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
-	useEffect(()=>{
-		if (!userInfo){
-            navigate('/login/')
-        }
-	}, [dispatch, navigate, userInfo])
-
-
+    
     const postCreateButton = async (e) =>{
         e.preventDefault()
         if (!picture){

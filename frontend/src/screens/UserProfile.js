@@ -22,11 +22,16 @@ function UserProfile() {
 
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(getUser()).then(() =>{
-            dispatch(postsUser())
-        })
-        
+        // dispatch(getUser()).then(() =>{
+        //     dispatch(postsUser())
+        // })
+        dispatch(postsUser())
     }, [dispatch])
+
+
+    const openBioLink =(url)=>{
+        window.open(url, "_blank")
+    }
 
   return (
     <div>
@@ -60,7 +65,7 @@ function UserProfile() {
                                 {userDetail.first_name && userDetail.last_name? <span>{userDetail?.first_name} { userDetail.last_name}</span>  : ''}
                             </h3>
                             <div className='user_bio'>{userDetail.bio}</div>
-                            <Link to={''} className='user_link'>{userDetail?.bio_link}</Link>
+                            <Link to={''} className='user_link' onClick={()=> openBioLink(userDetail.bio_link)}>{userDetail && userDetail.bio_link}</Link>
                             <p>Followed by <span>pelumi, oludamsam</span></p>
                         </div>
                         

@@ -31,7 +31,7 @@ function UpdatePost() {
 	// const { post } = postDetails
 
 
-    // checking if a user is loged in and redirecting
+    // collecting user token
 	const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
@@ -47,11 +47,8 @@ function UpdatePost() {
     }
 
 	useEffect(()=>{
-		if (!userInfo){
-            return navigate('/login/')
-        }
         getPostd()
-	}, [dispatch, navigate, userInfo])
+	}, [dispatch, navigate])
 
     
     console.log(caption)
